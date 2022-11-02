@@ -26,7 +26,8 @@ Stationery.init({
 },
 {
     sequelize: db,
-    modelName: 'Stationery'
+    modelName: 'Stationery',
+    tableName: 'stationeries'
 })
 
 // foreignKey: 'UserId' munkin akan generate otomatis
