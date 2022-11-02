@@ -9,5 +9,6 @@ router.post("/login", UserController.login)
 router.post("/index", verifyToken, UserController.index)
 router.post("/logout", verifyToken, UserController.logout)
 router.post("/refresh", UserController.refreshToken)
+router.get("/", UserController.coba)
 
 export default router

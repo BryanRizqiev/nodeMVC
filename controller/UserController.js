@@ -141,6 +141,11 @@ class UserController {
      
         return res.status(200).json(result)
     }
+
+    static async coba(req, res) {
+
+        return res.status(200).json({message: "Yahaha wahyu"})
+    }
 }
 
 export default UserController
