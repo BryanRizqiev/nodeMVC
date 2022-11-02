@@ -13,6 +13,8 @@ app.use(cookieParser())
 
 app.use(router)
 
+const port = process.env.PORT || 3000
+
 app.listen(8000, () => {
     console.log(`Server running on port ${8000}`)
 })
