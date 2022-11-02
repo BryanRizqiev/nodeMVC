@@ -29,7 +29,8 @@ User.init({
 },
 {
     sequelize: db,
-    modelName: 'User'
+    modelName: 'User',
+    tableName: 'users'
 })
 
 User.hasMany(Stationery)
