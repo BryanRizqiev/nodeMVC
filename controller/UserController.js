@@ -4,13 +4,29 @@ import User from "../model/User.js"
 import Stationery from "../model/Stationery.js"
 import con from "../config/mysql.js"
 import jwt from "jsonwebtoken"
+import dns from "dns/promises"
+import Validator from "fastest-validator"
+const v = new Validator()
 
 class UserController {
 
     static async register(req, res) {
     
+        const schema = {
+            name: { type: "string" },
+            email: { type: "string" },
+            password: { type: "string" },
+            address: { type: "string" }
+        }
+
         try {
+
             const { name, email, password, address } = req.body
+
+            let check = v.compile(schema)
+            check = check({ name, email, password, address })
+            if (check.length) return res.status(400).json(check)
+
             const hashedPassword = hash(password, 10)
     
             await User.create({
@@ -29,9 +45,18 @@ class UserController {
 
     static async login(req, res) {
 
+        const schema = {
+            email: { type: "string" },
+            password: { type: "string" }
+        }
+
         try {
 
             const { email, password } = req.body
+
+            let check = v.compile(schema)
+            check = check({ email, password })
+            if (check.length) return res.status(400).json(check)
             
             const result = await User.findOne({
                 where: { email }
@@ -68,7 +93,7 @@ class UserController {
 
         const { token } = req.cookies
 
-        if (!token) return res.status(403).json(err)
+        if (!token) return res.setStatus(403)
 
         jwt.verify(token, process.env.SECRET_KEY, (err) => {
             if (err) {
@@ -115,8 +140,15 @@ class UserController {
 
     static async getDatas(req, res) {
         
+        const authHeader = req.headers['authorization']
+        const token = authHeader && authHeader.split(' ')[1]
+
+        const user = jwt.decode(token)
+
+        console.log(user.user)
+
         const result = await User.findOne({
-            where: {id : 1},
+            where: {id : user.user},
             include : {model: Stationery}
         })
 
@@ -132,6 +164,14 @@ class UserController {
         })
     }
 
+    static async getDns(req, res) {
+
+        const ip = dns.lookup(req.params.dns)
+
+        return res.json({ip})
+    }
+
+    // percobaan
     static async cobaCuy(req, res) {
         
         const result = await Stationery.findOne({
