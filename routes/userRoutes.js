@@ -2,15 +2,15 @@ import express from "express"
 import UserController from "../controller/UserController.js"
 import verifyToken from "../middleware/verifyToken.js"
 
-const router = express.Router()
+const userRouter = express.Router()
 
-router.get("/getDns", UserController.getDns)
-router.get("/", UserController.coba)
-router.post("/register", UserController.register)
-router.post("/login", UserController.login)
-router.get("/getDatas", verifyToken, UserController.getDatas)
-router.post("/index", verifyToken, UserController.index)
-router.post("/refresh", UserController.refreshToken)
-router.post("/logout", verifyToken, UserController.logout)
+userRouter.get("/getDns", UserController.getDns)
+userRouter.get("/", UserController.coba)
+userRouter.post("/register", UserController.register)
+userRouter.post("/login", UserController.login)
+userRouter.get("/getDatas", verifyToken, UserController.getDatas)
+userRouter.post("/index", verifyToken, UserController.index)
+userRouter.post("/refresh", UserController.refreshToken)
+userRouter.post("/logout", verifyToken, UserController.logout)
 
-export default router
+export default userRouter
