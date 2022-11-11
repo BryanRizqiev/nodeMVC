@@ -4,7 +4,7 @@ import User from "../model/User.js"
 import Stationery from "../model/Stationery.js"
 import con from "../config/mysql.js"
 import jwt from "jsonwebtoken"
-import dns from "dns/promises"
+// import dns from "dns/promises"
 import Validator from "fastest-validator"
 const v = new Validator()
 
@@ -164,12 +164,12 @@ class UserController {
         })
     }
 
-    static async getDns(req, res) {
+//     static async getDns(req, res) {
 
-        const ip = dns.lookup(req.query.dns)
+//         const ip = dns.lookup(req.query.dns)
 
-        return res.json({ip})
-    }
+//         return res.json({ip})
+//     }
 
     // percobaan
     static async cobaCuy(req, res) {
