@@ -4,7 +4,7 @@ import verifyToken from "../middleware/verifyToken.js"
 
 const userRouter = express.Router()
 
-userRouter.get("/getDns", UserController.getDns)
+// userRouter.get("/getDns", UserController.getDns)
 userRouter.get("/", UserController.coba)
 userRouter.post("/register", UserController.register)
 userRouter.post("/login", UserController.login)
