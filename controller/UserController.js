@@ -166,7 +166,7 @@ class UserController {
 
     static async getDns(req, res) {
 
-        const ip = dns.lookup(req.params.dns)
+        const ip = dns.lookup(req.query.dns)
 
         return res.json({ip})
     }
